@@ -1,4 +1,4 @@
-FROM rust:1.82-slim
+FROM rust:1.84-slim
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
@@ -20,4 +20,3 @@ RUN stellar completion bash > /etc/bash_completion.d/stellar \
 
 # Ensure Cargo is in PATH
 ENV PATH="/usr/local/cargo/bin:${PATH}"
-
