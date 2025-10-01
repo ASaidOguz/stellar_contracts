@@ -14,9 +14,5 @@ RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/instal
     && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" \
     && brew install stellar-cli
 
-# Enable soroban completion (via stellar-cli)
-RUN stellar completion bash > /etc/bash_completion.d/stellar \
-    && stellar completion bash > /etc/bash_completion.d/soroban
-
 # Ensure Cargo is in PATH
 ENV PATH="/usr/local/cargo/bin:${PATH}"
