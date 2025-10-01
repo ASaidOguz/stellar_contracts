@@ -1,4 +1,4 @@
-FROM rust:1.84-slim
+FROM rust:nightly-slim
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
