@@ -1,12 +1,15 @@
-# Use the “nightly” tag (which includes slim variant behavior) as base
-FROM rust:nightly
+# Start from a valid Rust base image (slim variant is lighter)
+FROM rust:slim
 
-# Install dependencies
+# Install dependencies needed for building Soroban contracts
 RUN apt-get update && apt-get install -y \
     curl git build-essential pkg-config libssl-dev clang bash-completion \
     && rm -rf /var/lib/apt/lists/*
 
-# Add WASM target for Soroban smart contracts
+# Install and set Rust nightly as default
+RUN rustup install nightly && rustup default nightly
+
+# Add WASM target for Soroban smart contracts (nightly supports it best)
 RUN rustup target add wasm32v1-none
 
 # Install Homebrew (Linuxbrew) for stellar-cli
