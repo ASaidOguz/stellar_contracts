@@ -1,4 +1,5 @@
-FROM rust:nightly-slim
+# Use the “nightly” tag (which includes slim variant behavior) as base
+FROM rust:nightly
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
