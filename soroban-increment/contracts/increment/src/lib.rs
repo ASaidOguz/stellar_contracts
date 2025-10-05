@@ -19,13 +19,16 @@ impl IncrementContract {
         
         // increment the count;
         count += 1;
-        // fire event for updated count
+        // logging
         log!(&env, "increased count: {}", count);
         // store the new count back in storage(overwriting the existing value);
         env
         .storage()
         .instance()
         .set(&COUNTER, &count);
+        // fire increment event 
+        env.events()
+            .publish((COUNTER, symbol_short!("increment")), count);
         // some kind of storage time to live method
         env
         .storage()
@@ -60,7 +63,9 @@ impl IncrementContract {
         .storage()
         .instance()
         .set(&COUNTER, &count);
-
+        // fire decrement event 
+        env.events()
+            .publish((COUNTER, symbol_short!("decrement")), count);
         // some kind of storage time to live method
         env
         .storage()
@@ -87,15 +92,18 @@ impl IncrementContract {
             log!(&env, "count-already-zero: {}", count);
             return count;
         }
-             // update count;  
+        // update count;  
         count =0;
-        // firing event ;
+        // logging ;
         log!(&env, "reset count: {}", count);
         // store the new count back in storage(overwriting the existing value);
         env
         .storage()
         .instance()
         .set(&COUNTER, &count);
+        // firing event
+        env.events()
+            .publish((COUNTER, symbol_short!("reset")), count);
 
      // some kind of storage time to live method
         env

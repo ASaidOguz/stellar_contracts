@@ -12,6 +12,9 @@ added tests and functions
     - reset
     - get_current_value
 
+Added event firing functionality.For testing in each function invokation event vector is cleaned up 
+so it need to be function call assert + event assert -> doesnt work as it explained in docs.
+
 -
 
 -
