@@ -6,7 +6,7 @@ This repository uses the recommended structure for a Soroban project:
 ```text
 .
 ├── contracts
-│   └── increment
+│   └── soroban-customtype
 │       ├── src
 │       │   ├── lib.rs
 │       │   └── test.rs
@@ -15,4 +15,4 @@ This repository uses the recommended structure for a Soroban project:
 └── README.md
 ```
 
-- Increment contract 
+- soroban-customtype contract 
