@@ -17,7 +17,18 @@ so it need to be function call assert + event assert -> doesn't work as it expla
 
 - soroban-customtype -> Its time add custom-type for increment contract.This way it can hold the incremented value and can reflect in events by incr-new_value.
 deployed on testnet id:CCISHIKWHYKX3XRFEQWKIT72NZVP3EG546XR5FEBAMMPCD7KNQYARY5C
--
+-soroban-errors -> This contracts shows how to  build custom errors for increment contract.Defining an Error
+Contract errors are Rust u32 enums where every variant of the enum is assigned an integer. The #[contracterror] attribute is used to set the error up so it can be used in the return value of contract functions.
+
+The enum has some constraints:
+
+It must have the #[repr(u32)] attribute.
+It must have the #[derive(Copy)] attribute.
+Every variant must have an explicit integer value assigned.
+
+----> If an error is returned from a function anything the function has done is rolled back. If ledger entries have been altered, or contract data stored, all those changes are reverted and will not be persisted.
+
+deployed on testnet id:CBVPWMFO2NHWLFVSYBSXNJM36AAS2U3V6NCMDIFQ7QOMZZMLMJPQO6DI
 
 
 -- [Stellar explorer](https://stellar.expert/explorer/testnet) for checking ids.
