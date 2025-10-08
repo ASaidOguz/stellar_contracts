@@ -13,5 +13,8 @@
         "ms-azuretools.vscode-docker"
       ]
     }
-  }
+  },
+  "runArgs": [
+    "--env", "DEVSEED=${DEVSEED}"
+  ]
 }
