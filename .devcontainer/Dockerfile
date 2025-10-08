@@ -19,8 +19,4 @@ RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/instal
 # Ensure Cargo in PATH
 ENV PATH="/usr/local/cargo/bin:${PATH}"
 
-# Entrypoint script
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
 CMD ["bash"]
