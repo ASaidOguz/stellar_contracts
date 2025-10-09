@@ -3,55 +3,52 @@
 CONTRACT_DIR := contracts/auth
 
 # === Stellar CLI tasks ===
+generate-account1:
+	stellar keys generate stellar_ahmet --network testnet --fund
+
+generate-account2:
+	stellar keys generate stellar_test --network testnet --fund
 
 add-account:
-	stellar keys generate stellar_ahmet --network testnet --fund
+	stellar keys add stellar_ahmet 
 
 check-account:
 	stellar keys address stellar_ahmet
 
-upload: 
+deploy: 
 	stellar contract deploy \
 		--wasm target/wasm32v1-none/release/auth.wasm \
 		--source-account stellar_ahmet \
 		--network testnet \
-		--alias auth
+		--alias auth\
+		-- --admin_address GBLEM3MIX2B6EUSLMCQ252INUCYNKN2WQDJWTOKN7EJPBY5EI4WLDYHB\
 
-deploy: 
-	stellar contract deploy \
-		--wasm-hash 781aa4cd9a3f64ee4028b2c9b4a2824d42e6e9b48115194eb17ecd5fa2cb0ae1 \
-		--source-account stellar_ahmet \
-		--network testnet \
-		--alias auth
-
-invoke-increment:
+invoke-increment-owner:
 	stellar contract invoke \
-		--id CC4VJI3DHIXC6KU7DTOPHVQHCHPMLUDBFTZJJENHFEQ3WRKXTSDTU5UQ \
+		--id CAQHSMS34QJ4FWIFQ22SSE4TSSRVRYOYX6Z5MAPWTLRLBWC3BXDANAWV \
 		--source-account stellar_ahmet \
 		--network testnet \
 		-- \
 		increment\
 		--value 69
-
-invoke-init:
+### This should fail the simulation!
+invoke-increment-nonowner:
 	stellar contract invoke \
-		--id CC4VJI3DHIXC6KU7DTOPHVQHCHPMLUDBFTZJJENHFEQ3WRKXTSDTU5UQ \
-		--source-account stellar_ahmet \
+		--id CAQHSMS34QJ4FWIFQ22SSE4TSSRVRYOYX6Z5MAPWTLRLBWC3BXDANAWV \
+		--source-account stellar_test \
 		--network testnet \
 		-- \
-		init
+		increment\
+		--value 69
 
 invoke-get-state:
 	stellar contract invoke \
-		--id CC4VJI3DHIXC6KU7DTOPHVQHCHPMLUDBFTZJJENHFEQ3WRKXTSDTU5UQ \
+		--id CCDL2LWGHBXSYNGT7VI3535KVDO3FBA23XVCQATJNGQ6X6SEVVTD4HMN \
 		--source-account stellar_ahmet \
 		--network testnet \
 		-- \
 		get_initstate\
 		
-
-
-
 # === Local development/test helpers ===
 
 test-with-logs:
